@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="public/dot_finance.png" alt="Dot.Finance" width="280" />
+
 <h1>Dot.Finance</h1>
 
 <p>AI-powered financial management — track accounts, categorise transactions, set budgets, and get intelligent spending insights.</p>
