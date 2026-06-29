@@ -1,83 +1,79 @@
 <div align="center">
 
-<img src="public/dot_finance.png" alt="Dot.Finance" width="280" />
+<img src="docs/logo.svg" alt="Dot.Finance" width="320" />
 
-<h1>Dot.Finance</h1>
+<br /><br />
 
-<p>AI-powered financial management — track accounts, categorise transactions, set budgets, and get intelligent spending insights.</p>
+**Track accounts, categorise transactions, and get intelligent spending insights.**
 
-[![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?style=flat-square&logo=php&logoColor=white)](https://php.net)
-[![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
-[![Livewire](https://img.shields.io/badge/Livewire-3.x-4E56A6?style=flat-square)](https://livewire.laravel.com)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=flat-square&logo=postgresql&logoColor=white)](https://postgresql.org)
-[![Tests](https://img.shields.io/badge/tests-37%20passing-brightgreen?style=flat-square)](tests/)
-[![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
+<br />
+
+![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=flat-square&logo=laravel&logoColor=white) ![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?style=flat-square&logo=php&logoColor=white) ![Livewire](https://img.shields.io/badge/Livewire-3-FB70A9?style=flat-square) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?style=flat-square&logo=postgresql&logoColor=white)
+
+<br /><br />
+
+**Part of the [InfoDot Ecosystem](https://github.com/sakhileb/InfoDot)** &nbsp;·&nbsp; `finance.infodot.app`
 
 </div>
 
 ---
 
-## Overview
+## What is Dot.Finance?
 
-Dot.Finance is the financial management platform in the Dot ecosystem. Connect multiple accounts, automatically categorise transactions, set monthly budgets per category, and receive AI-generated insights on your spending patterns.
+Dot.Finance is the financial management platform in the InfoDot ecosystem. Teams connect their bank accounts and expense streams, and an AI layer automatically categorises transactions, flags anomalies, and generates spend insights — keeping finances transparent and under control.
 
----
+## Core Features
 
-## Features
+- Account management — bank, credit, and expense accounts
+- Transaction import via CSV or bank sync
+- AI categorisation — smart labelling of every transaction
+- Budget setup with real-time progress tracking
+- Anomaly detection — flagged unusual spend patterns
+- P&L and cash-flow reports with chart visualisations
+- Invoice reconciliation with Dot.Billing
+- Ecosystem SSO from InfoDot hub
 
-- **Multi-account tracking** — bank, credit card, savings, and investment accounts
-- **Transaction management** — income and expense records with automatic categorisation
-- **Budget tracking** — monthly budgets per category with real-time spent vs. remaining
-- **AI insights** — Claude-powered analysis of spending trends and savings recommendations
-- **Reporting** — monthly summaries, category breakdowns, net worth over time
-- **Team/business mode** — shared accounts for business financial management
-- **Ecosystem SSO** — authenticate from InfoDot with a single click
+## Domain Models
 
----
-
-## Domain Model
-
-```
-Account     → Transactions → Category
-Category    → Transactions
-Budget      → Category (monthly target, spentAmount() computed)
-AiInsight   → User
-```
-
----
+- **Account** — financial account with balance
+- **Transaction** — debit or credit entry
+- **Budget** — category spend limit with period
+- **FinanceCategory** — transaction classification
 
 ## Tech Stack
 
 | Layer | Technology |
 |---|---|
-| Framework | Laravel 12 + PHP 8.4 |
-| Frontend | Livewire 3 + Alpine.js + Tailwind CSS |
-| Auth | Jetstream 5 + Sanctum (ecosystem SSO) |
-| Database | PostgreSQL 16 (shared infodot instance) |
-| AI | Anthropic Claude API |
-| WebSockets | Laravel Reverb |
-
----
+| Framework | Laravel 12 |
+| Language | PHP 8.4 |
+| Frontend | Livewire 3 · Alpine.js 3 · Tailwind CSS |
+| Database | PostgreSQL 16 (shared across ecosystem) |
+| Realtime | Laravel Reverb |
+| Auth | Laravel Sanctum (InfoDot SSO) |
+| AI | Anthropic Claude (`claude-sonnet-4-6`) |
+| Storage | AWS S3 / Local (Flysystem) |
+| Search | Laravel Scout · Meilisearch |
+| Queue | Redis · Laravel Horizon |
 
 ## Quick Start
 
 ```bash
-git clone https://github.com/sakhileb/Dot.Finance.git && cd Dot.Finance
-composer install && npm install
-cp .env.example .env && php artisan key:generate
-php artisan migrate && npm run dev & php artisan serve
+git clone https://github.com/sakhileb/Dot.Finance.git
+cd Dot.Finance
+cp .env.example .env
+composer install
+npm install && npm run build
+php artisan key:generate
+php artisan migrate
+php artisan serve
 ```
 
-```bash
-bash bin/test.sh   # 37 passing, 0 failed, 7 skipped
-```
+> **Ecosystem SSO:** Set `DB_*` env vars to the shared InfoDot PostgreSQL instance and `APP_URL=https://finance.infodot.app`. Users authenticated through InfoDot gain access automatically via Sanctum handoff tokens.
 
----
+## Ecosystem
 
-## Part of the Dot Ecosystem
+**Dot.Finance** is one of **21 platforms** in the InfoDot ecosystem, connected via shared PostgreSQL and Sanctum SSO. Visit [InfoDot](https://github.com/sakhileb/InfoDot) to explore the full platform map.
 
-Dot.Finance connects to [InfoDot](https://github.com/sakhileb/InfoDot) — the central hub. Log in to InfoDot once and navigate here without re-authenticating via `/auth/ecosystem`.
+## License
 
----
-
-MIT — © SK Digital / BluPin Incorporated
+MIT © [SK Digital / BluPin Incorporated](https://github.com/sakhileb)
